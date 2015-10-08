@@ -16,9 +16,7 @@ To start a Spark worker:
     docker run --name spark-worker-1 --link spark-master:spark-master -d bde2020/spark-worker:1.5.1-hadoop2.6
 
 ## Launch a Spark application using Spark submit
-1. Package your Spark application including dependency JARs (except Spark JARs which will already be available on the worker nodes)
-2. Submit the application to the Spark cluster
-
+Package your Spark application including dependency JARs except Spark JARs which will already be available on the worker nodes. Submit the application to the Spark cluster:
 
     docker run --name spark-submit \
         --link spark-master:spark-master \
