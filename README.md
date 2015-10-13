@@ -20,9 +20,8 @@ Package your Spark application including dependency JARs except Spark JARs which
 
     docker run --name spark-submit \
         --link spark-master:spark-master \
-        --entrypoint /spark/bin/spark-submit \
         --volume /path/to/your/my-application.jar:/app/application.jar \
-        -d bde2020/spark-base:1.5.1-hadoop2.6 \
+        -d bde2020/spark-submit:1.5.1-hadoop2.6 \
             --class my.main.Application \
             --master spark://spark-master:7077 \
             /app/application.jar {application-arguments}
