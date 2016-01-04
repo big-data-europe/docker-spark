@@ -31,7 +31,7 @@ Package your Spark application including dependency JARs except Spark JARs which
 3. Add the application JAR to the `SPARK_APPLICATION_JAR` location.
 4. Build and run the image
 ```
-docker build --rm=true -t spark-app
+docker build --rm=true -t spark-app .
 docker run --name my-spark-app --link spark-master:spark-master -d spark-app
 ```
 
