@@ -2,8 +2,6 @@
 
 The Spark Java template image serves as a base image to build your own Java application to run on a Spark cluster. See [big-data-europe/docker-spark README](https://github.com/big-data-europe/docker-spark) for a description how to setup a Spark cluster.
 
-## Launch a Spark Java application on your cluster
-
 ### Package your application using Maven
 You can build and launch your Java application on a Spark cluster by extending this image with your sources. The template uses [Maven](https://maven.apache.org/) as build tool, so make sure you have a `pom.xml` file for your application specifying all the dependencies.
 
@@ -34,6 +32,7 @@ FROM bde2020/spark-java-template:1.5.1-hadoop2.6
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
+ENV SPARK_APPLICATION_JAR_NAME my-app-1.0-SNAPSHOT-with-dependencies
 ENV SPARK_APPLICATION_MAIN_CLASS eu.bde.my.Application
 ENV SPARK_APPLICATION_ARGS "foo bar baz"
 
