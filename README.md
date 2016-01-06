@@ -19,3 +19,6 @@ To start a Spark worker:
 
 ## Launch a Spark application
 Building and running your Spark application on top of the Spark cluster is as simple as extending a template Docker image. Check the template's README for further documentation.
+* [Java template](https://github.com/big-data-europe/docker-spark/tree/master/template/java)
+* Scala template (will be added soon)
+* Python template (will be added soon)
