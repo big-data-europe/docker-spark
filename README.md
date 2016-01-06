@@ -25,10 +25,10 @@ Package your Spark application including dependency JARs except Spark JARs which
 2. Configure the following environment variables:
   * `SPARK_MASTER_NAME` (default: spark-master)
   * `SPARK_MASTER_PORT` (default: 7077)
-  * `SPARK_APPLICATION_JAR` (default: /app/application.jar)
+  * `SPARK_APPLICATION_JAR_LOCATION` (default: /app/application.jar)
   * `SPARK_APPLICATION_MAIN_CLASS` (default: my.main.Application)
   * `SPARK_APPLICATION_ARGS` (default: "")
-3. Add the application JAR to the `SPARK_APPLICATION_JAR` location.
+3. Add the application JAR to the `SPARK_APPLICATION_JAR_LOCATION`
 4. Build and run the image
 ```
 docker build --rm=true -t spark-app .
