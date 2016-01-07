@@ -9,6 +9,11 @@ ADD template.sh /
 RUN apt-get install -y maven \
       && chmod +x /template.sh \
       && update-java-alternatives -s java-1.8.0-openjdk-amd64 \
-      && mkdir -p /app
-      
+      && mkdir -p /app \
+      && mkdir -p /usr/src/app
+
+ONBUILD ADD . /usr/src/app
+ONBUILD RUN cd /usr/src/app \
+      && mvn clean package
+
 CMD ["/bin/bash", "/template.sh"]
