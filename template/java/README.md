@@ -10,19 +10,21 @@ The Maven `package` command must create an assembly JAR (or 'uber' JAR) containi
 ### Extending the Spark Java template with your application
 
 #### Steps to extend the Spark Java template
-1. Extend the Spark Java template Docker image
-2. Configure the following environment variables (unless the default value satisfies):
+1. Create a Dockerfile in the root folder of your project (which also contains a `pom.xml`)
+2. Extend the Spark Java template Docker image
+3. Configure the following environment variables (unless the default value satisfies):
   * `SPARK_MASTER_NAME` (default: spark-master)
   * `SPARK_MASTER_PORT` (default: 7077)
   * `SPARK_APPLICATION_JAR_NAME` (default: application-1.0)
   * `SPARK_APPLICATION_MAIN_CLASS` (default: my.main.Application)
   * `SPARK_APPLICATION_ARGS` (default: "")
-3. Add the sources to `/usr/src/app`
 4. Build and run the image
 ```
 docker build --rm=true -t bde/spark-app .
 docker run --name my-spark-app --link spark-master:spark-master -d bde/spark-app
 ```
+
+The sources in the project folder will be automatically added to `/usr/src/app` if you directly extend the Spark Java template image. Otherwise you will have to add the sources by yourself in your Dockerfile with the command `ADD . /usr/src/app`.
 
 If you overwrite the template's `CMD` in your Dockerfile, make sure to execute the `/template.sh` script at the end.
 
@@ -35,8 +37,6 @@ MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 ENV SPARK_APPLICATION_JAR_NAME my-app-1.0-SNAPSHOT-with-dependencies
 ENV SPARK_APPLICATION_MAIN_CLASS eu.bde.my.Application
 ENV SPARK_APPLICATION_ARGS "foo bar baz"
-
-ADD . /usr/src/app
 ```
 
 #### Example application
