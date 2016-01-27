@@ -1,5 +1,10 @@
 #!/bin/bash
 
-/spark/sbin/start-slave.sh spark://spark-master:7077
+. "/spark/sbin/spark-config.sh"
 
-tail -f `find /spark/logs/ -name *Worker*.out`
+. "/spark/bin/load-spark-env.sh"
+
+mkdir -p $SPARK_WORKER_LOG
+/spark/sbin/../bin/spark-class org.apache.spark.deploy.worker.Worker \
+    --webui-port $SPARK_WORKER_WEBUI_PORT $SPARK_MASTER >> $SPARK_WORKER_LOG/spark-worker.out
+
