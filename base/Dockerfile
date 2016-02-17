@@ -2,7 +2,7 @@ FROM java:8
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
-ENV INIT_DAEMON_BASE_URI http://dispatcher/init-daemon
+ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
 COPY wait-for-step.sh /
