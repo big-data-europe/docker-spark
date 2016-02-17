@@ -6,7 +6,8 @@ ENV SPARK_APPLICATION_JAR_NAME application-1.0
 
 ADD template.sh /
 
-RUN apt-get install -y maven \
+RUN apt-get update \
+      && apt-get install -y maven \
       && chmod +x /template.sh \
       && update-java-alternatives -s java-1.8.0-openjdk-amd64 \
       && mkdir -p /app \
