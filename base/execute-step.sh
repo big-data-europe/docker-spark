@@ -1,5 +1,11 @@
 #!/bin/bash
 
 echo "Execute step ${INIT_DAEMON_STEP} in pipeline"
-curl -X PUT $INIT_DAEMON_BASE_URI/execute?step=$INIT_DAEMON_STEP
+while true; do
+    sleep 5
+    echo -n '.'
+    string=$(curl -sL -w "%{http_code}" -X PUT $INIT_DAEMON_BASE_URI/execute?step=$INIT_DAEMON_STEP -o /dev/null)
+    [ "$string" = "204" ] && break
+done
+
 
