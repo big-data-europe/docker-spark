@@ -2,7 +2,7 @@ FROM bde2020/spark-base:1.5.1-hadoop2.6
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
-ADD worker.sh /
+COPY worker.sh /
 
 ENV SPARK_WORKER_WEBUI_PORT 8081
 ENV SPARK_WORKER_LOG /spark/logs
