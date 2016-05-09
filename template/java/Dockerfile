@@ -4,7 +4,7 @@ MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
 ENV SPARK_APPLICATION_JAR_NAME application-1.0
 
-ADD template.sh /
+COPY template.sh /
 
 RUN apt-get update \
       && apt-get install -y maven \
@@ -13,7 +13,7 @@ RUN apt-get update \
       && mkdir -p /app \
       && mkdir -p /usr/src/app
 
-ONBUILD ADD . /usr/src/app
+ONBUILD COPY . /usr/src/app
 ONBUILD RUN cd /usr/src/app \
       && mvn clean package
 

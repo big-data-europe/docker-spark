@@ -2,7 +2,7 @@ FROM bde2020/spark-base:1.5.1-hadoop2.6
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
-ADD master.sh /
+COPY master.sh /
 
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080
