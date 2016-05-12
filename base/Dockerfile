@@ -12,13 +12,13 @@ COPY finish-step.sh /
 
 COPY bde-spark.css /css/org/apache/spark/ui/static/timeline-view.css
 
-
 RUN apt-get update \
       && apt-get install -y curl \
       && chmod +x *.sh \
       && wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz \
       && tar -xvzf spark-1.5.1-bin-hadoop2.6.tgz \
       && mv spark-1.5.1-bin-hadoop2.6 spark \
+      && rm spark-1.5.1-bin-hadoop2.6.tgz \
       && cd /css \
       && jar uf /spark/lib/spark-assembly-1.5.1-hadoop2.6.0.jar org/apache/spark/ui/static/timeline-view.css \
       && cd /
