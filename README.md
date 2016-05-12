@@ -16,6 +16,19 @@ To start a Spark master:
 To start a Spark worker:
 
     docker run --name spark-worker-1 --link spark-master:spark-master -d bde2020/spark-worker:1.5.1-hadoop2.6
+    
+## Using Docker Compose
+
+Add the following services to your `docker-compose.yml` to integrate a Spark master and Spark worker in your pipeline: 
+```
+master:
+  image: bde2020/spark-master:1.5.1-hadoop2.6
+  hostname: spark-master
+worker:
+  image: bde2020/spark-worker:1.5.1-hadoop2.6
+  links:
+    - "master:spark-master"
+```
 
 ## Launch a Spark application
 Building and running your Spark application on top of the Spark cluster is as simple as extending a template Docker image. Check the template's README for further documentation.
