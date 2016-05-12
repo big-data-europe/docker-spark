@@ -26,7 +26,7 @@ docker run --name my-spark-app --link spark-master:spark-master -d bde/spark-app
 
 The sources in the project folder will be automatically added to `/usr/src/app` if you directly extend the Spark Java template image. Otherwise you will have to add and package the sources by yourself in your Dockerfile with the commands:
 
-    ADD . /usr/src/app
+    COPY . /usr/src/app
     RUN cd /usr/src/app \
         && mvn clean package
       
