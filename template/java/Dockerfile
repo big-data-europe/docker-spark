@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:poc-init-daemon
+FROM bde2020/spark-submit:1.5.1-hadoop2.6
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
