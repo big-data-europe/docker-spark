@@ -13,6 +13,14 @@ RUN apt-get update \
       && mkdir -p /app \
       && mkdir -p /usr/src/app
 
+# Copy the POM-file first, for separate dependency resolving and downloading
+ONBUILD COPY pom.xml /usr/src/app
+ONBUILD RUN cd /usr/src/app \
+      && mvn dependency:resolve
+ONBUILD RUN cd /usr/src/app \
+      && mvn verify
+
+# Copy the source code and build the application
 ONBUILD COPY . /usr/src/app
 ONBUILD RUN cd /usr/src/app \
       && mvn clean package
