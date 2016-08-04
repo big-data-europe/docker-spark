@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:1.6.2-hadoop2.6
+FROM bde2020/spark-submit:poc-job-polling
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
@@ -22,6 +22,7 @@ ONBUILD RUN cd /usr/src/app \
 
 # Copy the source code and build the application
 ONBUILD COPY . /usr/src/app
+ONBUILD COPY config/ /config
 ONBUILD RUN cd /usr/src/app \
       && mvn clean package
 
