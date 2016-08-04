@@ -9,13 +9,12 @@ class JobExecution
 
   def start
     while true
-      arguments = wait_for_job
-      execute_job(arguments)
+      job = wait_for_job
+      execute_job(job)
     end
   end
   
   def wait_for_job
-    # poll for a job
     result = []
     while result.empty?
       puts "Checking store for a job"
@@ -23,17 +22,37 @@ class JobExecution
       result = @client.query query
       sleep 5
     end
-
-    # parse result and create arguments for Spark app
-    pattern = File.read('/config/job-arguments.pattern')
-    resource = result.first
-    eval(pattern)
+    result.first
   end
 
-  def execute_job(arguments)
-    puts "Executing job with arguments: #{arguments}"
+  def execute_job(job)
+    # create arguments string for Spark app
+    pattern = File.read('/config/job-arguments.pattern')
+    arguments = eval(pattern)
+
+    # execute Spark submit
+    puts "Executing job #{job['job']} with arguments: #{arguments}"
     ENV['SPARK_APPLICATION_ARGS'] = arguments
     `/bin/bash /spark-submit.sh`
+    puts "Finished job. Updating status."
+    update_status_query(job['job'])
+  end
+
+  def update_status_query(job_uri, status_uri = "http://www.big-data-europe.eu/vocabularies/job/Done")
+    query =  "PREFIX cogs: <http://vocab.deri.ie/cogs#> "
+    query += "PREFIX job: <http://www.big-data-europe.eu/vocabularies/job/> "
+    query += "WITH <#{ENV['SPARQL_GRAPH']}>"
+    query += "DELETE { "
+    query += "  <#{job_uri}> job:status ?status "
+    query += "} WHERE { "
+    query += "  <#{job_uri}> a cogs:Job ; "
+    query += "    job:status ?status . "
+    query += "} "
+    query += " "
+    query += "INSERT DATA { "
+    query += "  <#{job_uri}> job:status <#{status_uri}> "    
+    query += "} "
+    @client.update query
   end
   
 end

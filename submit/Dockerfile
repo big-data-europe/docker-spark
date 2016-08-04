@@ -3,6 +3,7 @@ FROM bde2020/spark-base:1.6.2-hadoop2.6
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
 ENV SPARQL_ENDPOINT 'http://database:8890/sparql'
+ENV SPARQL_GRAPH 'http://mu.semte.ch/application'
 
 ENV SPARK_MASTER_NAME spark-master
 ENV SPARK_MASTER_PORT 7077
