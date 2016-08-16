@@ -1,6 +1,7 @@
-FROM bde2020/spark-base:1.5.1-hadoop2.6
+FROM bde2020/spark-base:2.0.0-hadoop2.7-hive
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
+MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 
 COPY worker.sh /
 

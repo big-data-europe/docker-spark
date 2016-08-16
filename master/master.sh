@@ -8,5 +8,5 @@ export SPARK_MASTER_IP=`hostname`
 
 mkdir -p $SPARK_MASTER_LOG
 
-/spark/sbin/../bin/spark-class org.apache.spark.deploy.master.Master \
-    --ip $SPARK_MASTER_IP --port $SPARK_MASTER_PORT --webui-port $SPARK_MASTER_WEBUI_PORT >> $SPARK_MASTER_LOG/spark-master.out
+/spark/bin/spark-class org.apache.spark.deploy.master.Master \
+    --host $SPARK_MASTER_IP --port $SPARK_MASTER_PORT --webui-port $SPARK_MASTER_WEBUI_PORT >> $SPARK_MASTER_LOG/spark-master.out

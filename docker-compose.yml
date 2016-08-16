@@ -1,0 +1,56 @@
+version: "2"
+
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:1.0.0-hadoop2.7.1
+    container_name: namenode
+    volumes:
+      - ./data/namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop-hive.env
+  datanode:
+    image: bde2020/hadoop-datanode:1.0.0-hadoop2.7.1
+    container_name: datanode
+    volumes:
+      - ./data/datanode:/hadoop/dfs/data
+    env_file:
+      - ./hadoop-hive.env
+  hive-server:
+    image: bde2020/hive:2.1.0-postgresql-metastore
+    container_name: hive-server
+    env_file:
+      - ./hadoop-hive.env
+    environment:
+      - "HIVE_CORE_CONF_javax_jdo_option_ConnectionURL=jdbc:postgresql://hive-metastore/metastore"
+    links:
+      - "hive-metastore"
+      - "namenode"
+    ports:
+      - "10000:10000"
+  hive-metastore:
+    image: bde2020/hive:2.1.0-postgresql-metastore
+    container_name: hive-metastore
+    env_file:
+      - ./hadoop-hive.env
+    command: /opt/hive/bin/hive --service metastore
+  hive-metastore-postgresql:
+    image: bde2020/hive-metastore-postgresql:2.1.0
+  spark-master:
+    build: ./master
+    container_name: spark-master
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./hadoop-hive.env
+  spark-worker:
+    build: ./worker
+    container_name: spark-worker
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+    ports:
+      - "8081:8081"
+    env_file:
+      - ./hadoop-hive.env
+
