@@ -1,25 +1,17 @@
-# Spark Python Template
+# Spark Python template
 
-The Spark Python template image serves as a base image to build your own Python
-application to run on a Spark cluster. See
-[big-data-europe/docker-spark README](https://github.com/big-data-europe/docker-spark)
-for a description how to setup a Spark cluster.
+The Spark Python template image serves as a base image to build your own Python application to run on a Spark cluster. See [big-data-europe/docker-spark README](https://github.com/big-data-europe/docker-spark) for a description how to setup a Spark cluster.
 
-### Package Your Application Using pip
-You can build and launch your Python application on a Spark cluster by
-extending this image with your sources. The template uses
-[pip](https://pip.pypa.io/en/stable/) to manage the dependencies of your
-project, so make sure you have a `requirements.txt` file for your application
-specifying all the dependencies.
+### Package your application using pip
+You can build and launch your Python application on a Spark cluster by extending this image with your sources. The template uses [pip](https://pip.pypa.io/en/stable/) to manage the dependencies of your
+project, so make sure you have a `requirements.txt` file in the root of your application specifying all the dependencies.
 
-### Extending the Spark Python template With Your Application
+### Extending the Spark Python template with your application
 
-#### Steps to Extend the Spark Python Template
-1. Create a Dockerfile in the root folder of your project (which also contains
-   a `requirements.txt`)
+#### Steps to extend the Spark Python template
+1. Create a Dockerfile in the root folder of your project (which also contains a `requirements.txt`)
 2. Extend the Spark Python template Docker image
-3. Configure the following environment variables (unless the default value
-   satisfies):
+3. Configure the following environment variables (unless the default value satisfies):
   * `SPARK_MASTER_NAME` (default: spark-master)
   * `SPARK_MASTER_PORT` (default: 7077)
   * `SPARK_APPLICATION_PYTHON_LOCATION` (default: /app/app.py)
@@ -30,19 +22,15 @@ docker build --rm -t bde/spark-app .
 docker run --name my-spark-app --link spark-master:spark-master -d bde/spark-app
 ```
 
-The sources in the project folder will be automatically added to `/app`
-if you directly extend the Spark Python template image. Otherwise you will have
-to add the sources by yourself in your Dockerfile with the
-commands:
+The sources in the project folder will be automatically added to `/app` if you directly extend the Spark Python template image. Otherwise you will have to add the sources by yourself in your Dockerfile with the command:
 
     COPY . /app
 
-If you overwrite the template's `CMD` in your Dockerfile, make sure to execute
-the `/template.sh` script at the end.
+If you overwrite the template's `CMD` in your Dockerfile, make sure to execute the `/template.sh` script at the end.
 
 #### Example Dockerfile
 ```
-FROM bde2020/spark-python-template:1.5.1-hadoop2.6
+FROM bde2020/spark-python-template:1.6.2-hadoop2.6
 
 MAINTAINER You <you@example.org>
 
@@ -51,4 +39,4 @@ ENV SPARK_APPLICATION_ARGS "foo bar baz"
 ```
 
 #### Example application
-TODO
+Coming soon
