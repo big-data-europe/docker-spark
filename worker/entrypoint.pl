@@ -7,8 +7,8 @@ use IO::Select;
 pipe(CHILD_STDOUT_R, CHILD_STDOUT_W);
 pipe(CHILD_STDERR_R, CHILD_STDERR_W);
 
-system("/wait-for-step.sh");
-system("/execute-step.sh");
+system("/wait-for-step.sh") == 0 or die "invalid exit status: $?";
+system("/execute-step.sh") == 0 or die "invalid exit status: $?";
 
 if( my $child = fork )
 {
@@ -46,7 +46,7 @@ if( my $child = fork )
 
       if( m/Worker: Successfully registered with master/ )
       {
-        system("/finish-step.sh");
+        system("/finish-step.sh") == 0 or warn "invalid exit status: $?";
       }
     }
   }
