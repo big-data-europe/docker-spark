@@ -5,7 +5,18 @@ application to run on a Spark cluster. See
 [big-data-europe/docker-spark README](https://github.com/big-data-europe/docker-spark)
 for a description how to setup a Spark cluster.
 
-### Package your application using sbt
+## Scala Console
+
+`sbt console` will create you a Spark Context for testing your code like the
+spark-shell:
+
+```
+docker run -it --rm bde2020/spark-scala-template sbt console
+```
+
+You can also use directly your Docker image and test your own code that way.
+
+## Package your application using sbt
 
 You can build and launch your Scala application on a Spark cluster by extending
 this image with your sources. The template uses
@@ -29,7 +40,6 @@ dependencies.
    satisfies):
   * `SPARK_MASTER_NAME` (default: spark-master)
   * `SPARK_MASTER_PORT` (default: 7077)
-  * `SPARK_APPLICATION_JAR_NAME` (default: scala-2.11/app-assembly-0.1-SNAPSHOT)
   * `SPARK_APPLICATION_MAIN_CLASS` (default: Application)
   * `SPARK_APPLICATION_ARGS` (default: "")
 4. Build and run the image:
@@ -56,7 +66,6 @@ FROM bde2020/spark-scala-template:1.6.2-hadoop2.6
 
 MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
 
-ENV SPARK_APPLICATION_JAR_NAME my-app-1.0-SNAPSHOT-with-dependencies
 ENV SPARK_APPLICATION_MAIN_CLASS eu.bde.my.Application
 ENV SPARK_APPLICATION_ARGS "foo bar baz"
 ```

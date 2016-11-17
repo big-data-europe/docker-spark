@@ -1,6 +1,11 @@
 #!/bin/bash
 
-cd /usr/src/app
-cp target/${SPARK_APPLICATION_JAR_NAME}.jar ${SPARK_APPLICATION_JAR_LOCATION}
+SPARK_APPLICATION_JAR_LOCATION=`find /app/target -iname '*-assembly-*.jar' | head -n1`
+export SPARK_APPLICATION_JAR_LOCATION
 
-sh /submit.sh
+if [ -z "$SPARK_APPLICATION_JAR_LOCATION" ]; then
+	echo "Can't find a file *-assembly-*.jar in /app/target"
+	exit 1
+fi
+
+/submit.sh
