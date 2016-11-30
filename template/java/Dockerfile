@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:1.5.1-hadoop2.6
+FROM bde2020/spark-submit:1.1.0-hadoop2.7.1-java8
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 

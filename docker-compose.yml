@@ -2,7 +2,7 @@ version: "2"
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:1.0.0-hadoop2.7.1
+    image: bde2020/hadoop-namenode:1.1.0-hadoop2.7.1-java8
     container_name: namenode
     volumes:
       - ./data/namenode:/hadoop/dfs/name
@@ -11,7 +11,7 @@ services:
     env_file:
       - ./hadoop-hive.env
   datanode:
-    image: bde2020/hadoop-datanode:1.0.0-hadoop2.7.1
+    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
     container_name: datanode
     volumes:
       - ./data/datanode:/hadoop/dfs/data
@@ -42,6 +42,7 @@ services:
     container_name: spark-master
     ports:
       - "8080:8080"
+      - "7077:7077"
     env_file:
       - ./hadoop-hive.env
   spark-worker:
