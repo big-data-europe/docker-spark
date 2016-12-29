@@ -18,12 +18,12 @@ RUN chmod +x /usr/bin/apt-get-install
 
 RUN apt-get-install -y curl \
       && chmod +x *.sh \
-      && wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.1-bin-hadoop2.7.tgz \
-      && tar -xvzf spark-2.0.1-bin-hadoop2.7.tgz \
-      && mv spark-2.0.1-bin-hadoop2.7 spark \
-      && rm spark-2.0.1-bin-hadoop2.7.tgz \
+      && wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.7.tgz \
+      && tar -xvzf spark-2.0.2-bin-hadoop2.7.tgz \
+      && mv spark-2.0.2-bin-hadoop2.7 spark \
+      && rm spark-2.0.2-bin-hadoop2.7.tgz \
       && cd /css \
-      && jar uf /spark/jars/spark-core_2.11-2.0.1.jar org/apache/spark/ui/static/timeline-view.css \
+      && jar uf /spark/jars/spark-core_2.11-2.0.2.jar org/apache/spark/ui/static/timeline-view.css \
       && cd /
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
