@@ -7,6 +7,11 @@ Docker images to:
 Currently supported versions:
 * Spark 1.5.1 for Hadoop 2.6 and later
 * Spark 1.6.2 for Hadoop 2.6 and later
+* Spark 2.0.0 for Hadoop 2.7+ with Hive support and OpenJDK 7
+* Spark 2.0.0 for Hadoop 2.7+ with Hive support and OpenJDK 8
+* Spark 2.0.1 for Hadoop 2.7+ with OpenJDK 8
+* Spark 2.0.2 for Hadoop 2.7+ with OpenJDK 8
+* Spark 2.1.0 for Hadoop 2.7+ with OpenJDK 8
 
 ## Using Docker Compose
 
