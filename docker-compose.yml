@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 
 services:
   namenode:
@@ -17,26 +17,9 @@ services:
       - ./data/datanode:/hadoop/dfs/data
     env_file:
       - ./hadoop-hive.env
-  hive-server:
-    image: bde2020/hive:2.1.0-postgresql-metastore
-    container_name: hive-server
-    env_file:
-      - ./hadoop-hive.env
-    environment:
-      - "HIVE_CORE_CONF_javax_jdo_option_ConnectionURL=jdbc:postgresql://hive-metastore/metastore"
-    links:
-      - "hive-metastore"
-      - "namenode"
-    ports:
-      - "10000:10000"
-  hive-metastore:
-    image: bde2020/hive:2.1.0-postgresql-metastore
-    container_name: hive-metastore
-    env_file:
-      - ./hadoop-hive.env
-    command: /opt/hive/bin/hive --service metastore
-  hive-metastore-postgresql:
-    image: bde2020/hive-metastore-postgresql:2.1.0
+    depends_on:
+      namenode:
+        condition: service_healthy
   spark-master:
     build: ./master
     container_name: spark-master
@@ -45,6 +28,11 @@ services:
       - "7077:7077"
     env_file:
       - ./hadoop-hive.env
+    depends_on:
+      namenode:
+        condition: service_healthy
+      datanode:
+        condition: service_healthy
   spark-worker:
     build: ./worker
     container_name: spark-worker
@@ -54,4 +42,7 @@ services:
       - "8081:8081"
     env_file:
       - ./hadoop-hive.env
+    depends_on:
+      spark-master:
+        condition: service_healthy
 

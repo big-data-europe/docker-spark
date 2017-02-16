@@ -3,6 +3,8 @@ FROM bde2020/spark-base:2.0.0-hadoop2.7-hive-java8
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 
+HEALTHCHECK CMD curl -f http://localhost:8081/ || exit 1
+
 COPY worker.sh /
 
 ENV SPARK_WORKER_WEBUI_PORT 8081
