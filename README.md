@@ -51,3 +51,7 @@ make spark
 ```
 make spark-app
 ```
+To scale up spark workers:
+```
+docker-compose -f docker-compose-minimal.yml scale spark-worker=2
+```
