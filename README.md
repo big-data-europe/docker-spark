@@ -39,3 +39,15 @@ Building and running your Spark application on top of the Spark cluster is as si
 * [Java template](https://github.com/big-data-europe/docker-spark/tree/master/template/java)
 * Scala template (will be added soon)
 * Python template (will be added soon)
+
+### Example Application
+
+1. Run the cluster
+```
+make network
+make spark
+```
+2. Run the application (calculates Pi)
+```
+make spark-app
+```
