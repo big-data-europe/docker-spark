@@ -1,6 +1,7 @@
-FROM bde2020/spark-base:1.6.2-hadoop2.6
+FROM bde2020/spark-base:2.1.0-hadoop2.7
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
+MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
 
 COPY master.sh /
 

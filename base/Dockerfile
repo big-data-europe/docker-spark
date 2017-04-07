@@ -1,10 +1,14 @@
 FROM java:8
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
+MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
 
 ENV ENABLE_INIT_DAEMON true
 ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
+
+ENV SPARK_VERSION=2.1.0
+ENV HADOOP_VERSION=2.7
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
@@ -17,12 +21,12 @@ RUN chmod +x /usr/bin/apt-get-install
 
 RUN apt-get-install -y curl \
       && chmod +x *.sh \
-      && wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.2-bin-hadoop2.6.tgz \
-      && tar -xvzf spark-1.6.2-bin-hadoop2.6.tgz \
-      && mv spark-1.6.2-bin-hadoop2.6 spark \
-      && rm spark-1.6.2-bin-hadoop2.6.tgz \
+      && wget http://d3kbcqa49mib13.cloudfront.net/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
+      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
+      && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
+      && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && cd /css \
-      && jar uf /spark/lib/spark-assembly-1.6.2-hadoop2.6.0.jar org/apache/spark/ui/static/timeline-view.css \
+      && jar uf /spark/jars/spark-core_2.11-${SPARK_VERSION}.jar org/apache/spark/ui/static/timeline-view.css \
       && cd /
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
