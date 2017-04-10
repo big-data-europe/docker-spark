@@ -2,7 +2,7 @@ version: "2.1"
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:1.1.0-hadoop2.7.1-java8
+    image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
     container_name: namenode
     volumes:
       - ./data/namenode:/hadoop/dfs/name
@@ -15,7 +15,7 @@ services:
     networks:
       - spark-net
   datanode:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
+    image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
     container_name: datanode
     volumes:
       - ./data/datanode:/hadoop/dfs/data
