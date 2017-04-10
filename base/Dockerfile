@@ -1,4 +1,4 @@
-FROM bde2020/hadoop-base:1.1.0-hadoop2.7.1-java8
+FROM bde2020/hadoop-base:1.1.0-hadoop2.8-java8
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
@@ -13,11 +13,11 @@ COPY finish-step.sh /
 
 RUN apt-get update \
       && apt-get install -y wget \
-      && wget https://dl.dropboxusercontent.com/u/4882345/packages/spark-2.0.0-bin.tgz \
+      && wget https://dl.dropboxusercontent.com/u/4882345/packages/spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive.tgz \
       && apt-get --purge remove -y wget \
-      && tar -xvzf spark-2.0.0-bin.tgz \
-      && mv spark-2.0.0-bin spark \
-      && rm spark-2.0.0-bin.tgz \
+      && tar -xvzf spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive.tgz \
+      && mv spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive spark \
+      && rm spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive.tgz \
       && cd /
 
 ENV SPARK_HOME /spark/
