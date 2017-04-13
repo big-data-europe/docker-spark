@@ -25,4 +25,4 @@ ONBUILD COPY . /usr/src/app
 ONBUILD RUN cd /usr/src/app \
       && mvn clean package
 
-CMD ["/bin/bash", "/template.sh"]
+CMD ["/template.sh"]

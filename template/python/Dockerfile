@@ -12,4 +12,4 @@ ONBUILD RUN cd /app \
 # Copy the source code
 ONBUILD COPY . /app
 
-CMD ["/bin/bash", "/template.sh"]
+CMD ["/template.sh"]

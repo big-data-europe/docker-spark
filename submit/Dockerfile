@@ -11,4 +11,4 @@ ENV SPARK_APPLICATION_ARGS ""
 
 COPY submit.sh /
 
-CMD ["/bin/bash", "/submit.sh"]
+CMD ["/submit.sh"]

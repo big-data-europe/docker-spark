@@ -10,4 +10,4 @@ ENV SPARK_MASTER "spark://spark-master:7077"
 
 EXPOSE 8081
 
-CMD ["/bin/bash", "/worker.sh"]
+CMD ["/worker.sh"]
