@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:2.1.0-hadoop2.7
+FROM bde2020/spark-base:2.1.0-bigtop-java8
 
 LABEL authors="Erika Pauwels <erika.pauwels@tenforce.com>, Gezim Sejdiu <g.sejdiu@gmail.com>, Cecile Tonglet <cecile.tonglet@tenforce.com>"
 

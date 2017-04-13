@@ -7,7 +7,8 @@ ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
 ENV SPARK_VERSION=2.1.0
-ENV HADOOP_VERSION=2.7
+ENV HADOOP_VERSION=2.7.3
+ENV BIGTOP_VERSION=1.2.0
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
@@ -18,14 +19,16 @@ COPY bde-spark.css /css/org/apache/spark/ui/static/timeline-view.css
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
 
-RUN apt-get-install -y curl \
-      && wget http://d3kbcqa49mib13.cloudfront.net/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-      && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
-      && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-      && cd /css \
-      && jar uf /spark/jars/spark-core_2.11-${SPARK_VERSION}.jar org/apache/spark/ui/static/timeline-view.css \
-      && cd /
+RUN apt-get-install curl
+
+ADD https://www.apache.org/dist/bigtop/bigtop-${BIGTOP_VERSION}/repos/debian8/bigtop.list /etc/apt/sources.list.d/
+RUN curl https://www.apache.org/dist/bigtop/bigtop-${BIGTOP_VERSION}/repos/GPG-KEY-bigtop | apt-key add -
+
+RUN apt-get-install spark-core
+
+RUN (cd /css && jar uf /usr/lib/spark/jars/spark-core_2.11-${SPARK_VERSION}.jar org/apache/spark/ui/static/timeline-view.css) \
+      && rm -fR /css \
+      && ln -s /usr/lib/spark /spark
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
 
