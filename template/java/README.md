@@ -29,12 +29,12 @@ The sources in the project folder will be automatically added to `/usr/src/app` 
     COPY . /usr/src/app
     RUN cd /usr/src/app \
         && mvn clean package
-      
+
 If you overwrite the template's `CMD` in your Dockerfile, make sure to execute the `/template.sh` script at the end.
 
 #### Example Dockerfile
 ```
-FROM bde2020/spark-java-template:2.1.0-hadoop2.7
+FROM bde2020/spark-java-template:2.1.1-hadoop2.7
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 

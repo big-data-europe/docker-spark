@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:2.1.0-hadoop2.7
+FROM bde2020/spark-submit:2.1.1-hadoop2.7
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
