@@ -13,11 +13,11 @@ COPY finish-step.sh /
 
 RUN apt-get update \
       && apt-get install -y wget \
-      && wget https://dl.dropboxusercontent.com/u/4882345/packages/spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive.tgz \
+      && wget https://www.dropbox.com/s/mgb6h7cwkbzct6f/spark-2.2.0-bin-2.8.2.tgz \
       && apt-get --purge remove -y wget \
-      && tar -xvzf spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive.tgz \
-      && mv spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive spark \
-      && rm spark-2.1.2-SNAPSHOT-bin-spark-2.1.0-hive.tgz \
+      && tar -xvzf spark-2.2.0-bin-2.8.2.tgz \
+      && mv spark-2.2.0-bin-2.8.2 spark \
+      && rm spark-2.2.0-bin-2.8.2.tgz \
       && cd /
 
 ENV SPARK_HOME /spark/
