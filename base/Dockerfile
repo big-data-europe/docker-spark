@@ -21,7 +21,7 @@ RUN chmod +x /usr/bin/apt-get-install
 
 RUN apt-get-install -y curl \
       && chmod +x *.sh \
-      && wget https://www.apache.org/dyn/closer.lua/spark/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
+      && wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
       && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
