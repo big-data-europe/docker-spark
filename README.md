@@ -11,14 +11,12 @@ Docker images to:
 make network
 make spark
 ```
+
 2. Run the application (calculates Pi)
 ```
 make spark-app
 ```
-To scale up spark workers:
-```
-docker-compose -f docker-compose-minimal.yml scale spark-worker=2
-```
+
 3. Stop & clean up
 ```
 make down
