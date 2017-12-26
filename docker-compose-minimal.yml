@@ -1,50 +1,34 @@
-version: "2.1"
+version: "3"
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
-    container_name: namenode
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
     volumes:
-      - ./data/namenode:/hadoop/dfs/name
+      - sparknamenode:/hadoop/dfs/name
     environment:
-      - CLUSTER_NAME=test
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-    healthcheck:
-      interval: 5s
-      retries: 100 
+      CLUSTER_NAME: test
+      CORE_CONF_fs_defaultFS: hdfs://namenode:8020
+    ports:
+      - 50070:50070
     networks:
       - spark-net
   datanode:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
-    container_name: datanode
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     volumes:
-      - ./data/datanode:/hadoop/dfs/data
+      - sparkdatanode:/hadoop/dfs/data
     environment:
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-    depends_on:
-      namenode:
-        condition: service_healthy
-    healthcheck:
-      interval: 5s
-      retries: 100 
+      CORE_CONF_fs_defaultFS: hdfs://namenode:8020
+      SERVICE_PRECONDITION: "namenode:50070"
     networks:
       - spark-net
   spark-master:
     image: bde2020/spark-master:2.2.0-hadoop2.8-hive-java8
-    container_name: spark-master
     ports:
-      - "8080:8080"
-      - "7077:7077"
+      - 8081:8080
+      - 7077:7077
     environment:
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-    depends_on:
-      namenode:
-        condition: service_healthy
-      datanode:
-        condition: service_healthy
-    healthcheck:
-      interval: 5s
-      retries: 100 
+      CORE_CONF_fs_defaultFS: hdfs://namenode:8020
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075"
     networks:
       - spark-net
   spark-worker:
@@ -52,15 +36,14 @@ services:
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
     environment:
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-    depends_on:
-      spark-master:
-        condition: service_healthy
-    healthcheck:
-      interval: 5s
-      retries: 100 
+      CORE_CONF_fs_defaultFS: hdfs://namenode:8020
+      SERVICE_PRECONDITION: "spark-master:8080"
     networks:
       - spark-net
+
+volumes:
+  sparknamenode:
+  sparkdatanode:
 
 networks:
   spark-net:

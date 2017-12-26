@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:2.1.0-hadoop2.8-hive-java8
+FROM bde2020/spark-submit:2.2.0-hadoop2.8-hive-java8
 
 RUN mkdir -p /app
 COPY spark-examples.jar /app/
