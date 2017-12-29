@@ -1,3 +1,4 @@
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/big-data-europe/Lobby)
 # Spark docker
 
 Docker images to:
