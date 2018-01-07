@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:1.6.3-hadoop2.8-hive-java8
+FROM bde2020/spark-base:1.6.3-nohadoop-java8
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>

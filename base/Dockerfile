@@ -28,4 +28,6 @@ COPY spark-env.sh /spark/conf/
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+COPY statsd-jvm-profiler-2.1.0.jar /statsd-jvm-profiler.jar
+
 ENTRYPOINT ["entrypoint.sh"]
