@@ -1,10 +1,9 @@
-FROM bde2020/spark-submit:2.2.0-hadoop2.8-hive-java8
+FROM bde2020/spark-submit:1.6.3-hadoop2.8-hive-java8
 
 RUN mkdir -p /app
-COPY spark-examples.jar /app/
+COPY SparkWrite.jar /app/
 
 ENV SPARK_MASTER_NAME spark-master
 ENV SPARK_MASTER_PORT 7077
-ENV SPARK_APPLICATION_JAR_LOCATION /app/spark-examples.jar
-ENV SPARK_APPLICATION_MAIN_CLASS org.apache.spark.examples.SparkPi
-ENV SPARK_APPLICATION_ARGS ""
+ENV SPARK_APPLICATION_JAR_LOCATION /app/SparkWrite.jar
+ENV SPARK_APPLICATION_MAIN_CLASS org.ermilov.SparkWriteApplication

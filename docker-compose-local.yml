@@ -1,8 +1,8 @@
-version: "2.1"
+version: "2"
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
     container_name: namenode
     volumes:
       - ./data/namenode:/hadoop/dfs/name
@@ -13,40 +13,42 @@ services:
     ports:
       - "50070:50070"
   datanode:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     container_name: datanode
     volumes:
       - ./data/datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070"
     env_file:
       - ./hadoop-hive.env
-    depends_on:
-      namenode:
-        condition: service_healthy
     ports:
       - "50075:50075"
   spark-master:
-    build: ./master
+    image: bde2020/spark-master:1.6.3-nohadoop-java8
     container_name: spark-master
+    environment:
+      CORE_CONF_fs_defaultFS: "hdfs://namenode:8020"
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075"
+    env_file:
+      - ./hadoop-hive.env
     ports:
       - "8080:8080"
       - "7077:7077"
-    env_file:
-      - ./hadoop-hive.env
-    depends_on:
-      namenode:
-        condition: service_healthy
-      datanode:
-        condition: service_healthy
   spark-worker:
-    build: ./worker
+    image: bde2020/spark-worker:1.6.3-nohadoop-java8
     container_name: spark-worker
     environment:
-      - "SPARK_MASTER=spark://spark-master:7077"
-    ports:
-      - "8081:8081"
+      SPARK_MASTER: "spark://spark-master:7077"
+      SERVICE_PRECONDITION: "spark-master:8080"
     env_file:
       - ./hadoop-hive.env
-    depends_on:
-      spark-master:
-        condition: service_healthy
-
+    ports:
+      - "8081:8081"
+  spark-example:
+    image: bde2020/spark-example:1.6.3-nohadoop-java8
+    container_name: spark-app
+    environment:
+      SPARK_MASTER: "spark://spark-master:7077"
+      SERVICE_PRECONDITION: "spark-master:8080 spark-worker:8081"
+    env_file:
+      - ./hadoop-hive.env
