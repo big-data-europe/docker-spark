@@ -13,8 +13,3 @@ test:
 test-yarn:
 	docker-compose -f docker-compose.yarn.yml up -d
 	docker logs -f spark-app
-
-download-example-app:
-	if [ ! -f example-app/SparkWrite.jar ]; then \
-	wget -O example-app/SparkWrite.jar https://www.dropbox.com/s/anct7cbd052200a/SparkWrite-1.6.3.jar ; \
-	fi

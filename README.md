@@ -6,18 +6,12 @@ Docker images to:
 
 ### Example Application
 
-1. Run the cluster
+Run Spark with application in standalone mode:
 ```
-make network
-make spark
-```
-
-2. Run the application (calculates Pi)
-```
-make spark-app
+make test
 ```
 
-3. Stop & clean up
+Run Spark with application in yarn:
 ```
-make down
+make test-yarn
 ```
