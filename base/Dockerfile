@@ -13,11 +13,11 @@ COPY finish-step.sh /
 
 RUN apt-get update \
       && apt-get install -y wget \
-      && wget http://artfiles.org/apache.org/spark/spark-1.6.3/spark-1.6.3-bin-without-hadoop.tgz \
+      && wget https://www.dropbox.com/s/ukbrgxn7tvizozu/spark-1.6.3-bin-2.2.0.tgz \
       && apt-get --purge remove -y wget \
-      && tar -xvzf spark-1.6.3-bin-without-hadoop.tgz \
-      && mv spark-1.6.3-bin-without-hadoop spark \
-      && rm spark-1.6.3-bin-without-hadoop.tgz \
+      && tar -xvzf spark-1.6.3-bin-2.2.0.tgz \
+      && mv spark-1.6.3-bin-2.2.0 spark \
+      && rm spark-1.6.3-bin-2.2.0.tgz \
       && cd /
 
 ENV SPARK_HOME /spark/

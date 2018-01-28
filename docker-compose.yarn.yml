@@ -23,6 +23,33 @@ services:
       - ./hadoop.env
     ports:
       - "50075:50075"
+  resourcemanager:
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop2.7.4-java8
+    container_name: resourcemanager
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075"
+    ports:
+      - "8088:8088"
+    env_file:
+      - ./hadoop.env
+  nodemanager1:
+    image: bde2020/hadoop-nodemanager:2.0.0-hadoop2.7.4-java8
+    container_name: nodemanager
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 resourcemanager:8088"
+    ports:
+      - "8042:8042"
+    env_file:
+      - ./hadoop.env
+  historyserver:
+    image: bde2020/hadoop-historyserver:2.0.0-hadoop2.7.4-java8
+    container_name: historyserver
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 resourcemanager:8088"
+    ports:
+      - "8188:8188"
+    env_file:
+      - ./hadoop.env
   spark-master:
     image: bde2020/spark-master:1.6.3-nohadoop-java8-scala2.11
     container_name: spark-master
@@ -45,10 +72,10 @@ services:
     ports:
       - "8081:8081"
   spark-example:
-    image: bde2020/spark-example:1.6.3-nohadoop-java8-scala2.11
+    image: bde2020/spark-base:1.6.3-nohadoop-java8-scala2.11
     container_name: spark-app
     environment:
       SERVICE_PRECONDITION: "spark-master:8080 spark-worker:8081"
-      command: "/spark/bin/spark-submit --class org.apache.spark.examples.SparkPi --master spark://spark-master:7077 --deploy-mode local --executor-memory 4G --num-executors 4 /spark/lib/spark-examples-1.6.3-hadoop2.2.0.jar"
+    command: "/spark/bin/spark-submit --class org.apache.spark.examples.SparkPi --master yarn --deploy-mode cluster --executor-memory 4G --num-executors 4 /spark/lib/spark-examples-1.6.3-hadoop2.2.0.jar"
     env_file:
       - ./hadoop.env

@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:1.6.3-nohadoop-java8
+FROM bde2020/spark-submit:1.6.3-nohadoop-java8-scala2.11
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
