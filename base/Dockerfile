@@ -31,6 +31,9 @@ RUN apt-get-install -y curl \
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
 
+#Give permission to execute scripts
+RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh
+
 # Fix the value of PYTHONHASHSEED
 # Note: this is needed when you use Python 3.3 or greater
 ENV PYTHONHASHSEED 1

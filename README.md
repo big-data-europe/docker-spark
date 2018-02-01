@@ -19,7 +19,7 @@ Currently supported versions:
 ## Using Docker Compose
 
 Add the following services to your `docker-compose.yml` to integrate a Spark master and Spark worker in [your BDE pipeline](https://github.com/big-data-europe/app-bde-pipeline):
-```
+```yml
 spark-master:
   image: bde2020/spark-master:2.2.1-hadoop2.7
   container_name: spark-master
