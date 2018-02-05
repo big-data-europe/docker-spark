@@ -59,3 +59,4 @@ docker-compose -f docker-compose-minimal.yml scale spark-worker=2
 ```
 make down
 ```
+
