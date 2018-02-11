@@ -13,7 +13,7 @@ COPY finish-step.sh /
 
 RUN apt-get update \
       && apt-get install -y wget \
-      && wget https://www.dropbox.com/s/ukbrgxn7tvizozu/spark-1.6.3-bin-2.2.0.tgz \
+      && wget https://www.dropbox.com/s/c09wigztyh1wsud/spark-1.6.3-bin-2.2.0.tgz \
       && apt-get --purge remove -y wget \
       && tar -xvzf spark-1.6.3-bin-2.2.0.tgz \
       && mv spark-1.6.3-bin-2.2.0 spark \
