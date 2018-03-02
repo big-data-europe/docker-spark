@@ -34,9 +34,10 @@ If you overwrite the template's `CMD` in your Dockerfile, make sure to execute t
 
 #### Example Dockerfile
 ```
-FROM bde2020/spark-java-template:2.2.1-hadoop2.7
+FROM bde2020/spark-java-template:2.3.0-hadoop2.7
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
+MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
 
 ENV SPARK_APPLICATION_JAR_NAME my-app-1.0-SNAPSHOT-with-dependencies
 ENV SPARK_APPLICATION_MAIN_CLASS eu.bde.my.Application

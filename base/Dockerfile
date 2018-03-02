@@ -7,7 +7,7 @@ ENV ENABLE_INIT_DAEMON true
 ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
-ENV SPARK_VERSION=2.2.1
+ENV SPARK_VERSION=2.3.0
 ENV HADOOP_VERSION=2.7
 
 COPY wait-for-step.sh /
@@ -30,6 +30,9 @@ RUN apt-get-install -y curl \
       && cd /
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
+
+#Give permission to execute scripts
+RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh
 
 # Fix the value of PYTHONHASHSEED
 # Note: this is needed when you use Python 3.3 or greater
