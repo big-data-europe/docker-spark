@@ -13,6 +13,7 @@ if [ -f "${SPARK_APPLICATION_JAR_LOCATION}" ]; then
     /spark/bin/spark-submit \
         --class ${SPARK_APPLICATION_MAIN_CLASS} \
         --master ${SPARK_MASTER_URL} \
+        ${SPARK_SUBMIT_ARGS} \
         ${SPARK_APPLICATION_JAR_LOCATION} ${SPARK_APPLICATION_ARGS}
 else
     if [ -f "${SPARK_APPLICATION_PYTHON_LOCATION}" ]; then
@@ -20,6 +21,7 @@ else
         echo "Passing arguments ${SPARK_APPLICATION_ARGS}"
         PYSPARK_PYTHON=python3 /spark/bin/spark-submit \
             --master ${SPARK_MASTER_URL} \
+            ${SPARK_SUBMIT_ARGS} \
             ${SPARK_APPLICATION_PYTHON_LOCATION} ${SPARK_APPLICATION_ARGS}
     else
         echo "Not recognized application."
