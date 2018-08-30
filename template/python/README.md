@@ -30,7 +30,7 @@ If you overwrite the template's `CMD` in your Dockerfile, make sure to execute t
 
 #### Example Dockerfile
 ```
-FROM bde2020/spark-python-template:2.2.0-hadoop2.7
+FROM bde2020/spark-python-template:2.2.2-hadoop2.7
 
 MAINTAINER You <you@example.org>
 
