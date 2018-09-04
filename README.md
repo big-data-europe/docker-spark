@@ -8,8 +8,11 @@ Docker images to:
 Currently supported versions:
 * Spark 2.3.1 for Hadoop 2.7+ with OpenJDK 8
 * Spark 2.3.0 for Hadoop 2.7+ with OpenJDK 8
+* Spark 2.2.2 for Hadoop 2.7+ with OpenJDK 8
 * Spark 2.2.1 for Hadoop 2.7+ with OpenJDK 8
 * Spark 2.2.0 for Hadoop 2.7+ with OpenJDK 8
+* Spark 2.1.3 for Hadoop 2.7+ with OpenJDK 8
+* Spark 2.1.2 for Hadoop 2.7+ with OpenJDK 8
 * Spark 2.1.1 for Hadoop 2.7+ with OpenJDK 8
 * Spark 2.1.0 for Hadoop 2.7+ with OpenJDK 8
 * Spark 2.0.2 for Hadoop 2.7+ with OpenJDK 8
