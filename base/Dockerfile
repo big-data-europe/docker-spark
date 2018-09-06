@@ -1,6 +1,5 @@
-FROM java:8
+FROM bde2020/hadoop-base:1.2.0-hadoop2.8-java8
 
-MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
 
 ENV ENABLE_INIT_DAEMON true
@@ -8,7 +7,6 @@ ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
 ENV SPARK_VERSION=2.3.1
-ENV HADOOP_VERSION=2.7
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
@@ -21,13 +19,15 @@ RUN chmod +x /usr/bin/apt-get-install
 
 RUN apt-get-install -y curl \
       && chmod +x *.sh \
-      && wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-      && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
-      && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
+      && wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz \
+      && tar -xvzf spark-${SPARK_VERSION}-bin-without-hadoop.tgz \
+      && mv spark-${SPARK_VERSION}-bin-without-hadoop spark \
+      && rm spark-${SPARK_VERSION}-bin-without-hadoop.tgz \
       #&& cd /css \
       #&& jar uf /spark/jars/spark-core_2.11-${SPARK_VERSION}.jar org/apache/spark/ui/static/timeline-view.css \
       && cd /
+
+ENV SPARK_HOME /spark/
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
 
@@ -37,3 +37,11 @@ RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-
 # Fix the value of PYTHONHASHSEED
 # Note: this is needed when you use Python 3.3 or greater
 ENV PYTHONHASHSEED 1
+
+COPY hive-site.xml /spark/conf/
+COPY spark-env.sh /spark/conf/
+
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]

@@ -1,6 +1,5 @@
-FROM bde2020/spark-base:2.3.1-hadoop2.7
+FROM bde2020/spark-base:2.3.1-hadoop2.8
 
-MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
 
 ENV SPARK_MASTER_NAME spark-master
