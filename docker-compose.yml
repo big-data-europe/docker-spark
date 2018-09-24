@@ -4,8 +4,9 @@ services:
     build: ./master
     container_name: spark-master
     ports:
-      - "8080:8080"
-      - "7077:7077"
+      - 127.0.0.1:8080:8080
+      - 127.0.0.1:7077:7077
+      - 127.0.0.1:6066:6066
     environment:
       - INIT_DAEMON_STEP=setup_spark
     network_mode: "host"
@@ -15,10 +16,10 @@ services:
     depends_on:
       - spark-master
     ports:
-      - "8081:8081"
+      - 127.0.0.1:8081:8081
     environment:
       - "SPARK_WORKER_WEBUI_PORT=8081"
-      - "SPARK_MASTER=spark://spark-master:7077"
+      - "SPARK_MASTER=spark://mohtaseb:7077"
     network_mode: "host"
   spark-worker-2:
     build: ./worker
@@ -26,8 +27,8 @@ services:
     depends_on:
       - spark-master
     ports:
-      - "8082:8082"
+      - 127.0.0.1:8082:8082
     environment:
       - "SPARK_WORKER_WEBUI_PORT=8082"
-      - "SPARK_MASTER=spark://spark-master:7077"
+      - "SPARK_MASTER=spark://mohtaseb:7077"
     network_mode: "host"
