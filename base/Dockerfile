@@ -63,7 +63,8 @@ RUN apt-get install -y curl grep sed dpkg && \
     rm tini.deb && \
     apt-get clean
 
-RUN conda install -c anaconda -y pandas numpy
+ADD executor_reqirements-so.txt executor_reqirements-so.txt
+RUN conda install -y --file executor_reqirements-so.txt
 
 #Environmentiables for Spark to use Anaconda Python and iPython notebook
 RUN ln -s /opt/conda/bin/python /usr/bin/python3
