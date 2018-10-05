@@ -1,10 +1,8 @@
-FROM bde2020/spark-submit:1.6.3-nohadoop-java8
-
-RUN mkdir -p /app
-COPY SparkWrite.jar /app/
+FROM bde2020/spark-submit:2.3.2-hadoop3.1.1-java8
 
 ENV SPARK_MASTER_NAME spark-master
 ENV SPARK_MASTER_PORT 7077
-ENV SPARK_APPLICATION_JAR_LOCATION /app/SparkWrite.jar
-ENV SPARK_APPLICATION_MAIN_CLASS org.ermilov.SparkWriteApplication
+ENV SPARK_APPLICATION_JAR_LOCATION /spark/examples/jars/spark-examples_2.11-2.3.2.jar
+ENV SPARK_APPLICATION_MAIN_CLASS org.apache.spark.examples.SparkPi
+ENV SPARK_APPLICATION_ARGS 100
 ENV ENABLE_INIT_DAEMON false

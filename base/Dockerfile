@@ -1,4 +1,4 @@
-FROM bde2020/hadoop-base:2.0.0-hadoop2.7.4-java8
+FROM bde2020/hadoop-base:2.0.0-hadoop3.1.1-java8
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
@@ -13,11 +13,11 @@ COPY finish-step.sh /
 
 RUN apt-get update \
       && apt-get install -y wget \
-      && wget http://artfiles.org/apache.org/spark/spark-1.6.3/spark-1.6.3-bin-without-hadoop.tgz \
+      && wget https://archive.apache.org/dist/spark/spark-2.3.2/spark-2.3.2-bin-without-hadoop.tgz \
       && apt-get --purge remove -y wget \
-      && tar -xvzf spark-1.6.3-bin-without-hadoop.tgz \
-      && mv spark-1.6.3-bin-without-hadoop spark \
-      && rm spark-1.6.3-bin-without-hadoop.tgz \
+      && tar -xvzf spark-2.3.2-bin-without-hadoop.tgz \
+      && mv spark-2.3.2-bin-without-hadoop spark \
+      && rm spark-2.3.2-bin-without-hadoop.tgz \
       && cd /
 
 ENV SPARK_HOME /spark/

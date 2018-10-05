@@ -2,7 +2,7 @@ version: "2"
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.1.1-java8
     container_name: namenode
     volumes:
       - ./data/namenode:/hadoop/dfs/name
@@ -11,31 +11,31 @@ services:
     env_file:
       - ./hadoop-hive.env
     ports:
-      - "50070:50070"
+      - "9870:9870"
   datanode:
-    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.1.1-java8
     container_name: datanode
     volumes:
       - ./data/datanode:/hadoop/dfs/data
     environment:
-      SERVICE_PRECONDITION: "namenode:50070"
+      SERVICE_PRECONDITION: "namenode:9870"
     env_file:
       - ./hadoop-hive.env
     ports:
       - "50075:50075"
   spark-master:
-    image: bde2020/spark-master:1.6.3-nohadoop-java8
+    image: bde2020/spark-master:2.3.2-hadoop3.1.1-java8
     container_name: spark-master
     environment:
       CORE_CONF_fs_defaultFS: "hdfs://namenode:8020"
-      SERVICE_PRECONDITION: "namenode:50070 datanode:50075"
+      SERVICE_PRECONDITION: "namenode:9870 datanode:9864"
     env_file:
       - ./hadoop-hive.env
     ports:
       - "8080:8080"
       - "7077:7077"
   spark-worker:
-    image: bde2020/spark-worker:1.6.3-nohadoop-java8
+    image: bde2020/spark-worker:2.3.2-hadoop3.1.1-java8
     container_name: spark-worker
     environment:
       SPARK_MASTER: "spark://spark-master:7077"
@@ -45,7 +45,7 @@ services:
     ports:
       - "8081:8081"
   spark-example:
-    image: bde2020/spark-example:1.6.3-nohadoop-java8
+    image: bde2020/spark-example:2.3.2-hadoop3.1.1-java8
     container_name: spark-app
     environment:
       SPARK_MASTER: "spark://spark-master:7077"
