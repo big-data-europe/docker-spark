@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:2.3.1-hadoop2.8
+FROM bde2020/spark-base:2.3.2-hadoop2.8
 
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
 
