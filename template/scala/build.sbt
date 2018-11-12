@@ -1,2 +1,2 @@
-sparkVersion := "2.3.2"
-scalaVersion := "2.11.11"
+sparkVersion := "2.4.0"
+scalaVersion := "2.11.12"
