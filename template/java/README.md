@@ -21,7 +21,7 @@ The Maven `package` command must create an assembly JAR (or 'uber' JAR) containi
 4. Build and run the image
 ```
 docker build --rm=true -t bde/spark-app .
-docker run --name my-spark-app --link spark-master:spark-master -d bde/spark-app
+docker run --name my-spark-app -e ENABLE_INIT_DAEMON=false --link spark-master:spark-master -d bde/spark-app
 ```
 
 The sources in the project folder will be automatically added to `/usr/src/app` if you directly extend the Spark Java template image. Otherwise you will have to add and package the sources by yourself in your Dockerfile with the commands:
