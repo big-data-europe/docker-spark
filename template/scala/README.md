@@ -45,7 +45,7 @@ dependencies.
 4. Build and run the image:
 ```
 docker build --rm=true -t bde/spark-app .
-docker run --name my-spark-app --link spark-master:spark-master -d bde/spark-app
+docker run --name my-spark-app -e ENABLE_INIT_DAEMON=false --link spark-master:spark-master -d bde/spark-app
 ```
 
 The sources in the project folder will be automatically added to `/usr/src/app`
@@ -62,7 +62,7 @@ the `/template.sh` script at the end.
 #### Example Dockerfile
 
 ```
-FROM bde2020/spark-scala-template:2.3.2-hadoop2.7
+FROM bde2020/spark-scala-template:2.4.0-hadoop2.7
 
 MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
 
