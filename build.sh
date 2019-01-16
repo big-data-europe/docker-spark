@@ -18,5 +18,5 @@ build master
 build worker
 build submit
 build java-template template/java
-#build python-template template/scala
+build scala-template template/scala
 build python-template template/python
