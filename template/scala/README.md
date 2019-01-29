@@ -23,7 +23,7 @@ this image with your sources. The template uses
 [sbt](http://www.scala-sbt.org) as build tool, so you should take the
 `build.sbt` file located in this directory and the `project` directory that
 includes the
-[sbt plugin for Spark](https://github.com/databricks/sbt-spark-package).
+[sbt-assembly](https://github.com/sbt/sbt-assembly).
 
 When the Docker image is built using this template, you should get a Docker
 image that includes a fat JAR containing your application and all its
