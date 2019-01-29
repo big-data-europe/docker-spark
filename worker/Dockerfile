@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:2.4.0-hadoop2.8
+FROM bde2020/spark-base:2.4.0-hadoop3.0
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>

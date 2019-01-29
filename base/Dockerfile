@@ -1,4 +1,4 @@
-FROM bde2020/hadoop-base:1.2.0-hadoop2.8-java8
+FROM bde2020/hadoop-base:2.0.0-hadoop3.1.1-java8
 
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
 
@@ -17,7 +17,7 @@ COPY finish-step.sh /
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
 
-RUN apt-get-install -y curl \
+RUN apt-get-install -y curl wget \
       && chmod +x *.sh \
       && wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-without-hadoop.tgz \
