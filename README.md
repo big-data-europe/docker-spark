@@ -25,36 +25,42 @@ Currently supported versions:
 ## Using Docker Compose
 
 Add the following services to your `docker-compose.yml` to integrate a Spark master and Spark worker in [your BDE pipeline](https://github.com/big-data-europe/app-bde-pipeline):
+(you should replace your host in docker-compose.yml file)
 ```yml
-spark-master:
-  image: bde2020/spark-master:2.3.1-hadoop2.7
-  container_name: spark-master
-  ports:
-    - "8080:8080"
-    - "7077:7077"
-  environment:
-    - INIT_DAEMON_STEP=setup_spark
-    - "constraint:node==<yourmasternode>"
-spark-worker-1:
-  image: bde2020/spark-worker:2.3.1-hadoop2.7
-  container_name: spark-worker-1
-  depends_on:
-    - spark-master
-  ports:
-    - "8081:8081"
-  environment:
-    - "SPARK_MASTER=spark://spark-master:7077"
-    - "constraint:node==<yourmasternode>"
-spark-worker-2:
-  image: bde2020/spark-worker:2.3.1-hadoop2.7
-  container_name: spark-worker-2
-  depends_on:
-    - spark-master
-  ports:
-    - "8081:8081"
-  environment:
-    - "SPARK_MASTER=spark://spark-master:7077"
-    - "constraint:node==<yourworkernode>"  
+version: '2'
+services:
+  spark-master:
+    build: ./master
+    container_name: spark-master
+    ports:
+      - 127.0.0.1:8080:8080
+      - 127.0.0.1:7077:7077
+      - 127.0.0.1:6066:6066
+    environment:
+      - INIT_DAEMON_STEP=setup_spark
+    network_mode: "host"
+  spark-worker-1:
+    build: ./worker
+    container_name: spark-worker-1
+    depends_on:
+      - spark-master
+    ports:
+      - 127.0.0.1:8081:8081
+    environment:
+      - "SPARK_WORKER_WEBUI_PORT=8081"
+      - "SPARK_MASTER=spark://your-host:7077"
+    network_mode: "host"
+  spark-worker-2:
+    build: ./worker
+    container_name: spark-worker-2
+    depends_on:
+      - spark-master
+    ports:
+      - 127.0.0.1:8082:8082
+    environment:
+      - "SPARK_WORKER_WEBUI_PORT=8082"
+      - "SPARK_MASTER=spark://your-host:7077"
+    network_mode: "host"
 ```
 Make sure to fill in the `INIT_DAEMON_STEP` as configured in your pipeline.
 
