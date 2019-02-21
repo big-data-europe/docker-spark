@@ -50,7 +50,7 @@ spark-worker-1:
     - "8081:8081"
   environment:
     - "SPARK_MASTER=spark://spark-master:7077"
-    - "constraint:node==<yourmasternode>"
+    - "constraint:node==<yourworkernode>"
 spark-worker-2:
   image: bde2020/spark-worker:2.4.0-hadoop2.7
   container_name: spark-worker-2
