@@ -23,7 +23,7 @@ this image with your sources. The template uses
 [sbt](http://www.scala-sbt.org) as build tool, so you should take the
 `build.sbt` file located in this directory and the `project` directory that
 includes the
-[sbt plugin for Spark](https://github.com/databricks/sbt-spark-package).
+[sbt-assembly](https://github.com/sbt/sbt-assembly).
 
 When the Docker image is built using this template, you should get a Docker
 image that includes a fat JAR containing your application and all its
@@ -45,7 +45,7 @@ dependencies.
 4. Build and run the image:
 ```
 docker build --rm=true -t bde/spark-app .
-docker run --name my-spark-app --link spark-master:spark-master -d bde/spark-app
+docker run --name my-spark-app -e ENABLE_INIT_DAEMON=false --link spark-master:spark-master -d bde/spark-app
 ```
 
 The sources in the project folder will be automatically added to `/usr/src/app`
@@ -62,7 +62,7 @@ the `/template.sh` script at the end.
 #### Example Dockerfile
 
 ```
-FROM bde2020/spark-scala-template:2.3.2-hadoop2.7
+FROM bde2020/spark-scala-template:2.4.0-hadoop2.7
 
 MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
 

@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:2.3.2-hadoop2.7
+FROM bde2020/spark-submit:2.4.0-hadoop2.7
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
@@ -7,10 +7,8 @@ ENV SPARK_APPLICATION_JAR_NAME application-1.0
 
 COPY template.sh /
 
-RUN apt-get update \
-      && apt-get install -y maven \
+RUN apk add --no-cache openjdk8 maven\
       && chmod +x /template.sh \
-      && update-java-alternatives -s java-1.8.0-openjdk-amd64 \
       && mkdir -p /app \
       && mkdir -p /usr/src/app
 
