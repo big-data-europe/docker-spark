@@ -58,7 +58,7 @@ spark-worker-2:
   depends_on:
     - spark-master
   ports:
-    - "8081:8081"
+    - "8082:8081"
   environment:
     - "SPARK_MASTER=spark://spark-master:7077"
     - "constraint:node==<yourworkernode>"  
