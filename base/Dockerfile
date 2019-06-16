@@ -16,7 +16,19 @@ COPY finish-step.sh /
 
 #COPY bde-spark.css /css/org/apache/spark/ui/static/timeline-view.css
 
-RUN apk add --no-cache curl bash openjdk8-jre python3 py-pip nss \
+ENV GLIBC_VERSION=2.29-r0 \
+    GRAALVM_VERSION=19.0.2 \
+    JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.0.2 \
+    PATH=/usr/lib/jvm/graalvm-ce-19.0.2/bin:$PATH
+
+RUN apk --no-cache add ca-certificates wget gcc zlib zlib-dev libc-dev bash
+
+RUN mkdir /usr/lib/jvm \
+    && wget "https://github.com/oracle/graal/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-linux-amd64-${GRAALVM_VERSION}.tar.gz" \
+    && tar -zxC /usr/lib/jvm -f graalvm-ce-linux-amd64-${GRAALVM_VERSION}.tar.gz \
+    && rm -f graalvm-ce-linux-amd64-${GRAALVM_VERSION}.tar.gz
+
+RUN apk add --no-cache curl bash python3 py-pip nss \
       && chmod +x *.sh \
       && wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
