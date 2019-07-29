@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.10
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
