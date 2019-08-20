@@ -21,6 +21,7 @@ function is_uri() {
 if [[ `is_uri $SPARK_APPLICATION_JAR_LOCATION`=="true" || -f "${SPARK_APPLICATION_JAR_LOCATION}" ]]; then
     echo "Submit application ${SPARK_APPLICATION_JAR_LOCATION} with main class ${SPARK_APPLICATION_MAIN_CLASS} to Spark master ${SPARK_MASTER_URL}"
     echo "Passing arguments ${SPARK_APPLICATION_ARGS}"
+    # Uses eval so that parameters in quotes could be passed, relevant for --conf parameters
     $(eval /spark/bin/spark-submit \
         --class ${SPARK_APPLICATION_MAIN_CLASS} \
         --master ${SPARK_MASTER_URL} \
