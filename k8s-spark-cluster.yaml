@@ -11,11 +11,11 @@ spec:
     port: 8080
     targetPort: 8080
   - name: master
-    protocol: TCP                                                                                                                                                                                                                           $
+    protocol: TCP                                                                                                                                                                                                                           
     port: 7077
     targetPort: 7077
   - name: master-rest
-    protocol: TCP                                                                                                                                                                                                                           $
+    protocol: TCP                                                                                                                                                                                                                           
     port: 6066
     targetPort: 6066
   clusterIP: None
@@ -29,32 +29,32 @@ spec:
     app: spark-client
   clusterIP: None
 ---
-apiVersion: apps/v1                                                                                                                                                                                                                         $
-kind: Deployment                                                                                                                                                                                                                            $
-metadata:                                                                                                                                                                                                                                   $
-  name: spark-master                                                                                                                                                                                                                        $
-  labels:                                                                                                                                                                                                                                   $
-    app: spark-master                                                                                                                                                                                                                       $
-spec:                                                                                                                                                                                                                                       $
-  selector:                                                                                                                                                                                                                                 $
-    matchLabels:                                                                                                                                                                                                                            $
-      app: spark-master                                                                                                                                                                                                                     $
-  template:                                                                                                                                                                                                                                 $
-    metadata:                                                                                                                                                                                                                               $
-      labels:                                                                                                                                                                                                                               $
-        app: spark-master                                                                                                                                                                                                                   $
-    spec:                                                                                                                                                                                                                                   $
-      containers:                                                                                                                                                                                                                           $
-      - name: spark-master                                                                                                                                                                                                                  $
-        image: bde2020/spark-master:2.4.3-hadoop2.7                                                                                                                                                                                         $
-        imagePullPolicy: Always                                                                                                                                                                                                             $
-        ports:                                                                                                                                                                                                                              $
-        - containerPort: 8080                                                                                                                                                                                                               $
-        - containerPort: 7077                                                                                                                                                                                                               $
+apiVersion: apps/v1                                                                                                                                                                                                                         
+kind: Deployment                                                                                                                                                                                                                            
+metadata:                                                                                                                                                                                                                                   
+  name: spark-master                                                                                                                                                                                                                        
+  labels:                                                                                                                                                                                                                                   
+    app: spark-master                                                                                                                                                                                                                       
+spec:                                                                                                                                                                                                                                       
+  selector:                                                                                                                                                                                                                                 
+    matchLabels:                                                                                                                                                                                                                            
+      app: spark-master                                                                                                                                                                                                                     
+  template:                                                                                                                                                                                                                                 
+    metadata:                                                                                                                                                                                                                               
+      labels:                                                                                                                                                                                                                               
+        app: spark-master                                                                                                                                                                                                                   
+    spec:                                                                                                                                                                                                                                   
+      containers:                                                                                                                                                                                                                           
+      - name: spark-master                                                                                                                                                                                                                  
+        image: bde2020/spark-master:2.4.3-hadoop2.7                                                                                                                                                                                         
+        imagePullPolicy: Always                                                                                                                                                                                                             
+        ports:                                                                                                                                                                                                                              
+        - containerPort: 8080                                                                                                                                                                                                               
+        - containerPort: 7077                                                                                                                                                                                                               
         - containerPort: 6066
----                                                                                                                                                                                                                                         $
-apiVersion: apps/v1                                                                                                                                                                                                                         $
-kind: DaemonSet                                                                                                                                                                                                                             $
+---                                                                                                                                                                                                                                         
+apiVersion: apps/v1                                                                                                                                                                                                                         
+kind: DaemonSet                                                                                                                                                                                                                             
 metadata:
   name: spark-worker
   labels:
