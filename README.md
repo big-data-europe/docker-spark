@@ -82,3 +82,24 @@ Building and running your Spark application on top of the Spark cluster is as si
 * [Java template](template/java)
 * [Python template](template/python)
 * [Scala template](template/scala)
+
+## Kubernetes deployment
+The BDE Spark images can also be used in a Kubernetes enviroment.
+
+To deploy a simple Spark standalone cluster issue
+
+`kubectl apply -f https://raw.githubusercontent.com/big-data-europe/docker-spark/master/k8s-spark-cluster.yaml`
+
+This will setup a Spark standalone cluster with one master and a worker on every available node using the default namespace and resources. The master is reachable in the same namespace at `spark://spark-master:7077`. 
+It will also setup a headless service so spark clients can be reachable from the workers using hostname `spark-client`.
+
+Then to use `spark-shell` issue 
+
+`kubectl run spark-base --rm -it --labels="app=spark-client" --image bde2020/spark-base:2.4.3-hadoop2.7 -- bash ./spark/bin/spark-shell --master spark://spark-master:7077 --conf spark.driver.host=spark-client`
+
+To use `spark-submit` issue for example
+
+`kubectl run spark-base --rm -it --labels="app=spark-client" --image bde2020/spark-base:2.4.3-hadoop2.7 -- bash ./spark/bin/spark-submit --class CLASS_TO_RUN --master spark://spark-master:7077 --deploy-mode client --conf spark.driver.host=spark-client URL_TO_YOUR_APP`
+
+You can use your own image packed with Spark and your application but when deployed it must be reachable from the workers. 
+One way to achieve this is by creating a headless service for your pod and then use `--conf spark.driver.host=YOUR_HEADLESS_SERVICE` whenever you submit your application.
