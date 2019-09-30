@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:2.4.3-hadoop2.7
+FROM bde2020/spark-submit:2.4.4-hadoop2.7
 
 MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
 
