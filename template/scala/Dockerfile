@@ -1,7 +1,6 @@
 FROM bde2020/spark-submit:2.4.4-hadoop2.7
 
-MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
-MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
+LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
 ARG SBT_VERSION
 ENV SBT_VERSION=${SBT_VERSION:-1.2.6}

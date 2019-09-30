@@ -1,7 +1,6 @@
 FROM bde2020/spark-submit:2.4.4-hadoop2.7
 
-MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
-MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
+LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
 ENV SPARK_APPLICATION_JAR_NAME application-1.0
 
