@@ -1,4 +1,4 @@
-FROM bde2020/spark-submit:3.0.0-hadoop3.2
+FROM bde2020/spark-submit:3.0.0-hadoop3.2-jre11
 
 LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
@@ -6,7 +6,7 @@ ENV SPARK_APPLICATION_JAR_NAME application-1.0
 
 COPY template.sh /
 
-RUN apk add --no-cache openjdk8 maven\
+RUN apk add --no-cache openjdk11 maven\
       && chmod +x /template.sh \
       && mkdir -p /app \
       && mkdir -p /usr/src/app
