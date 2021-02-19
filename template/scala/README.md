@@ -62,7 +62,7 @@ the `/template.sh` script at the end.
 #### Example Dockerfile
 
 ```
-FROM bde2020/spark-scala-template:2.4.0-hadoop2.7
+FROM bde2020/spark-scala-template:3.0.0-hadoop3.2-java11
 
 MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
 
