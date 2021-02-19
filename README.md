@@ -9,6 +9,7 @@ Docker images to:
 
 Currently supported versions:
 * Spark 3.0.1 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
+* Spark 3.0.0 for Hadoop 3.2 with OpenJDK 11 and Scala 2.12
 * Spark 3.0.0 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
 * Spark 2.4.5 for Hadoop 2.7+ with OpenJDK 8
 * Spark 2.4.4 for Hadoop 2.7+ with OpenJDK 8
