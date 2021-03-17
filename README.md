@@ -7,7 +7,9 @@ Docker images to:
 * Setup a standalone [Apache Spark](https://spark.apache.org/) cluster running one Spark Master and multiple Spark workers
 * Build Spark applications in Java, Scala or Python to run on a Spark cluster
 
-Currently supported versions:
+<details open>
+<summary>Currently supported versions:</summary>
+
 * Spark 3.1.1 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
 * Spark 3.1.1 for Hadoop 3.2 with OpenJDK 11 and Scala 2.12
 * Spark 3.0.2 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
@@ -37,6 +39,8 @@ Currently supported versions:
 * Spark 2.0.0 for Hadoop 2.7+ with Hive support and OpenJDK 7
 * Spark 1.6.2 for Hadoop 2.6 and later
 * Spark 1.5.1 for Hadoop 2.6 and later
+
+</details>
 
 ## Using Docker Compose
 
