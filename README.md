@@ -9,6 +9,7 @@ Docker images to:
 
 Currently supported versions:
 * Spark 3.1.1 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
+* Spark 3.1.1 for Hadoop 3.2 with OpenJDK 11 and Scala 2.12
 * Spark 3.0.2 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
 * Spark 3.0.1 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
 * Spark 3.0.0 for Hadoop 3.2 with OpenJDK 11 and Scala 2.12
@@ -49,7 +50,6 @@ spark-master:
     - "7077:7077"
   environment:
     - INIT_DAEMON_STEP=setup_spark
-    - "constraint:node==<yourmasternode>"
 spark-worker-1:
   image: bde2020/spark-worker:3.1.1-hadoop3.2
   container_name: spark-worker-1
@@ -59,7 +59,6 @@ spark-worker-1:
     - "8081:8081"
   environment:
     - "SPARK_MASTER=spark://spark-master:7077"
-    - "constraint:node==<yourworkernode>"
 spark-worker-2:
   image: bde2020/spark-worker:3.1.1-hadoop3.2
   container_name: spark-worker-2
@@ -69,7 +68,6 @@ spark-worker-2:
     - "8081:8081"
   environment:
     - "SPARK_MASTER=spark://spark-master:7077"
-    - "constraint:node==<yourworkernode>"  
 ```
 Make sure to fill in the `INIT_DAEMON_STEP` as configured in your pipeline.
 
