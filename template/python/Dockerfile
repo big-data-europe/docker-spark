@@ -1,6 +1,6 @@
-FROM bde2020/spark-submit:2.4.1-hadoop2.7
+FROM bde2020/spark-submit:3.1.1-hadoop3.2
 
-MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
+LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
 COPY template.sh /
 
