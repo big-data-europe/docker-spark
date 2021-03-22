@@ -47,32 +47,33 @@ Docker images to:
 Add the following services to your `docker-compose.yml` to integrate a Spark master and Spark worker in [your BDE pipeline](https://github.com/big-data-europe/app-bde-pipeline):
 ```yml
 version: '3'
-spark-master:
-  image: bde2020/spark-master:3.1.1-hadoop3.2
-  container_name: spark-master
-  ports:
-    - "8080:8080"
-    - "7077:7077"
-  environment:
-    - INIT_DAEMON_STEP=setup_spark
-spark-worker-1:
-  image: bde2020/spark-worker:3.1.1-hadoop3.2
-  container_name: spark-worker-1
-  depends_on:
-    - spark-master
-  ports:
-    - "8081:8081"
-  environment:
-    - "SPARK_MASTER=spark://spark-master:7077"
-spark-worker-2:
-  image: bde2020/spark-worker:3.1.1-hadoop3.2
-  container_name: spark-worker-2
-  depends_on:
-    - spark-master
-  ports:
-    - "8081:8081"
-  environment:
-    - "SPARK_MASTER=spark://spark-master:7077"
+services:
+  spark-master:
+    image: bde2020/spark-master:3.1.1-hadoop3.2
+    container_name: spark-master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    environment:
+      - INIT_DAEMON_STEP=setup_spark
+  spark-worker-1:
+    image: bde2020/spark-worker:3.1.1-hadoop3.2
+    container_name: spark-worker-1
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+  spark-worker-2:
+    image: bde2020/spark-worker:3.1.1-hadoop3.2
+    container_name: spark-worker-2
+    depends_on:
+      - spark-master
+    ports:
+      - "8082:8081"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
 ```
 Make sure to fill in the `INIT_DAEMON_STEP` as configured in your pipeline.
 
