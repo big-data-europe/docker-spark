@@ -46,6 +46,7 @@ Docker images to:
 
 Add the following services to your `docker-compose.yml` to integrate a Spark master and Spark worker in [your BDE pipeline](https://github.com/big-data-europe/app-bde-pipeline):
 ```yml
+version: '3'
 spark-master:
   image: bde2020/spark-master:3.1.1-hadoop3.2
   container_name: spark-master
