@@ -19,7 +19,7 @@ project, so make sure you have a `requirements.txt` file in the root of your app
 4. Build and run the image
 ```
 docker build --rm -t bde/spark-app .
-docker run --name my-spark-app -e ENABLE_INIT_DAEMON=false --link spark-master:spark-master -d bde/spark-app
+docker run --name my-spark-app -e ENABLE_INIT_DAEMON=false --link spark-master:spark-master --net dockerspark_default -d bde/spark-app
 ```
 
 The sources in the project folder will be automatically added to `/app` if you directly extend the Spark Python template image. Otherwise you will have to add the sources by yourself in your Dockerfile with the command:
@@ -30,7 +30,7 @@ If you overwrite the template's `CMD` in your Dockerfile, make sure to execute t
 
 #### Example Dockerfile
 ```
-FROM bde2020/spark-python-template:2.4.0-hadoop2.7
+FROM bde2020/spark-python-template:3.1.1-hadoop3.2
 
 MAINTAINER You <you@example.org>
 
