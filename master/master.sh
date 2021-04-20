@@ -1,8 +1,6 @@
 #!/bin/bash
 
-if [ ! $SPARK_MASTER_HOST_OVERWRITE ]; then
-    export SPARK_MASTER_HOST=`hostname`
-fi
+export SPARK_MASTER_HOST=${SPARK_MASTER_HOST:-`hostname`}
 
 . "/spark/sbin/spark-config.sh"
 
