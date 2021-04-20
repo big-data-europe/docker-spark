@@ -1,14 +1,13 @@
-FROM alpine:3.8
+FROM alpine:3.10
 
-MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
-MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
+LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
 ENV ENABLE_INIT_DAEMON true
 ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
-ENV SPARK_VERSION=2.4.0
-ENV HADOOP_VERSION=2.7
+ENV SPARK_VERSION=3.1.1
+ENV HADOOP_VERSION=3.2
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
@@ -16,7 +15,8 @@ COPY finish-step.sh /
 
 #COPY bde-spark.css /css/org/apache/spark/ui/static/timeline-view.css
 
-RUN apk add --no-cache curl bash openjdk8-jre python3 py-pip nss \
+RUN apk add --no-cache curl bash openjdk8-jre python3 py-pip nss libc6-compat \
+      && ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2 \
       && chmod +x *.sh \
       && wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
