@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export SPARK_HOME=/spark
+export SPARK_MASTER_HOST=${SPARK_MASTER_HOST:-`hostname`}
 
-export SPARK_MASTER_HOST=`hostname`
+export SPARK_HOME=/spark
 
 . "/spark/sbin/spark-config.sh"
 
