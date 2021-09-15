@@ -6,7 +6,7 @@ ENV ENABLE_INIT_DAEMON true
 ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
-ENV SPARK_VERSION=3.1.1
+ENV SPARK_VERSION=3.1.2
 ENV HADOOP_VERSION=3.2
 
 COPY wait-for-step.sh /
