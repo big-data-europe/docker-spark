@@ -1,0 +1,167 @@
+name: CI to Docker Hub
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+
+  base:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v5
+
+      - name: Sets env vars for image_tag
+        run: |
+          IMAGE_TAG=${{ steps.branch-name.outputs.current_branch }}
+          [ "$IMAGE_TAG" == "master" ] && IMAGE_TAG=latest
+          echo "DOCKER_IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Build and push image
+        uses: docker/build-push-action@v2
+        with:
+          context: base
+          file: base/Dockerfile
+          tags: bde2020/spark-base:${{env.DOCKER_IMAGE_TAG}}
+          push: ${{ github.event_name != 'pull_request' }}
+
+  master_worker:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [master, worker]
+
+    needs: 'base'
+    steps:
+    
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v5
+
+      - name: Sets env vars for image_tag
+        run: |
+          IMAGE_TAG=${{ steps.branch-name.outputs.current_branch }}
+          [ "$IMAGE_TAG" == "master" ] && IMAGE_TAG=latest
+          echo "DOCKER_IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Build and push image
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ matrix.image }}
+          file: ${{ matrix.image }}/Dockerfile
+          tags: bde2020/spark-${{ matrix.image }}:${{env.DOCKER_IMAGE_TAG}}
+          push: ${{ github.event_name != 'pull_request' }}
+
+  submit:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [submit]
+
+    needs: 'base'
+    steps:
+    
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v5
+
+      - name: Sets env vars for image_tag
+        run: |
+          IMAGE_TAG=${{ steps.branch-name.outputs.current_branch }}
+          [ "$IMAGE_TAG" == "master" ] && IMAGE_TAG=latest
+          echo "DOCKER_IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Build and push image
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ matrix.image }}
+          file: ${{ matrix.image }}/Dockerfile
+          tags: bde2020/spark-${{ matrix.image }}:${{env.DOCKER_IMAGE_TAG}}
+          push: ${{ github.event_name != 'pull_request' }}
+
+  template:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        template: [java, scala, python]
+
+    needs: 'submit'
+    steps:
+    
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v5
+
+      - name: Sets env vars for image_tag
+        run: |
+          IMAGE_TAG=${{ steps.branch-name.outputs.current_branch }}
+          [ "$IMAGE_TAG" == "master" ] && IMAGE_TAG=latest
+          echo "DOCKER_IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Build and push image
+        uses: docker/build-push-action@v2
+        with:
+          context: template/${{ matrix.template }}
+          file: template/${{ matrix.template }}/Dockerfile
+          tags: bde2020/spark-${{ matrix.template }}-template:${{env.DOCKER_IMAGE_TAG}}
+          push: ${{ github.event_name != 'pull_request' }}
