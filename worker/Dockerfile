@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 FROM bde2020/spark-base:3.1.1-hadoop3.2-java11
-=======
-FROM bde2020/spark-base:3.1.1-hadoop3.2
->>>>>>> master
 
 LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 

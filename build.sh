@@ -13,10 +13,11 @@ build() {
     cd -
 }
 
-build base
-build master
-build worker
-build submit
-build java-template template/java
-build scala-template template/scala
-build python-template template/python
+# build base
+# build master
+# build worker
+build history-server
+#build submit
+# build java-template template/java
+# build scala-template template/scala
+# build python-template template/python

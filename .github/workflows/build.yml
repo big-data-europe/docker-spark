@@ -40,13 +40,13 @@ jobs:
           tags: bde2020/spark-base:${{env.DOCKER_IMAGE_TAG}}
           push: ${{ github.event_name != 'pull_request' }}
 
-  master_worker:
+  master_worker_history:
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
-        image: [master, worker]
+        image: [master, worker, history-server]
 
     needs: 'base'
     steps:
