@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   spark-master:
     image: bde2020/spark-master:3.1.1-hadoop3.2-java11

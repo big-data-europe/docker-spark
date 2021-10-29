@@ -35,6 +35,8 @@ Currently supported versions:
 * Spark 1.6.2 for Hadoop 2.6 and later
 * Spark 1.5.1 for Hadoop 2.6 and later
 
+</details>
+
 ## Using Docker Compose
 
 Add the following services to your `docker-compose.yml` to integrate a Spark master and Spark worker in [your BDE pipeline](https://github.com/big-data-europe/app-bde-pipeline):
