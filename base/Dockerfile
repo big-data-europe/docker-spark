@@ -2,7 +2,7 @@ FROM alpine:3.10
 
 LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
-ENV ENABLE_INIT_DAEMON true
+ENV ENABLE_INIT_DAEMON false
 ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
