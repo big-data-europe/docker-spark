@@ -3,6 +3,7 @@ FROM bde2020/spark-submit:3.1.1-hadoop3.2-java11
 LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
 ENV SPARK_APPLICATION_JAR_NAME application-1.0
+ENV SPARK_APPLICATION_JAR_LOCATION /app/application.jar
 
 COPY template.sh /
 
