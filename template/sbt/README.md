@@ -1,6 +1,6 @@
-# Spark Scala template
+# Spark SBT template
 
-The Spark Scala template image serves as a base image to build your own Scala
+The Spark SBT template image serves as a base image to build your own Scala
 application to run on a Spark cluster. See
 [big-data-europe/docker-spark README](https://github.com/big-data-europe/docker-spark)
 for a description how to setup a Spark cluster.
@@ -11,7 +11,7 @@ for a description how to setup a Spark cluster.
 spark-shell:
 
 ```
-docker run -it --rm bde2020/spark-scala-template sbt console
+docker run -it --rm bde2020/spark-sbt-template sbt console
 ```
 
 You can also use directly your Docker image and test your own code that way.
@@ -29,9 +29,9 @@ When the Docker image is built using this template, you should get a Docker
 image that includes a fat JAR containing your application and all its
 dependencies.
 
-### Extending the Spark Scala template with your application
+### Extending the Spark SBT template with your application
 
-#### Steps to extend the Spark Scala template
+#### Steps to extend the Spark SBT template
 
 1. Create a Dockerfile in the root folder of your project (which also contains
    a `build.sbt`)
@@ -45,7 +45,7 @@ dependencies.
 4. Build and run the image:
 ```
 docker build --rm=true -t bde/spark-app .
-docker run --name my-spark-app -e ENABLE_INIT_DAEMON=false --link spark-master:spark-master -d bde/spark-app
+docker run --name my-spark-app --link spark-master:spark-master -d bde/spark-app
 ```
 
 The sources in the project folder will be automatically added to `/usr/src/app`
@@ -62,7 +62,7 @@ the `/template.sh` script at the end.
 #### Example Dockerfile
 
 ```
-FROM bde2020/spark-scala-template:3.1.1-hadoop3.2
+FROM bde2020/spark-sbt-template:3.1.1-hadoop3.2
 
 MAINTAINER Cecile Tonglet <cecile.tonglet@tenforce.com>
 

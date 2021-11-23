@@ -130,7 +130,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        template: [java, scala, python]
+        template: [maven, sbt, python]
 
     needs: 'submit'
     steps:
