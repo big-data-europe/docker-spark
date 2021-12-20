@@ -1,4 +1,4 @@
-FROM bde2020/spark-maven-template:3.1.2-hadoop3.2
+FROM bde2020/spark-maven-template:3.2.0-hadoop3.2
 
 LABEL MAINTAINER="Gezim Sejdiu <g.sejdiu@gmail.com>"
 

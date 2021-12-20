@@ -34,7 +34,7 @@ If you overwrite the template's `CMD` in your Dockerfile, make sure to execute t
 
 #### Example Dockerfile
 ```
-FROM bde2020/spark-maven-template:3.1.2-hadoop3.2
+FROM bde2020/spark-maven-template:3.2.0-hadoop3.2
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>

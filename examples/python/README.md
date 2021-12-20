@@ -17,5 +17,5 @@ To run the application, execute the following steps:
     ```
 3. Run the Docker container:
     ```bash
-    docker run --rm --network dockerspark_default --name pyspark-example bde2020/spark-python-example:3.1.2-hadoop3.2
+    docker run --rm --network dockerspark_default --name pyspark-example bde2020/spark-python-example:3.2.0-hadoop3.2
     ```
