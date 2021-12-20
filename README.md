@@ -10,6 +10,7 @@ Docker images to:
 <details open>
 <summary>Currently supported versions:</summary>
 
+* Spark 3.1.2 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
 * Spark 3.1.1 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
 * Spark 3.1.1 for Hadoop 3.2 with OpenJDK 11 and Scala 2.12
 * Spark 3.0.2 for Hadoop 3.2 with OpenJDK 8 and Scala 2.12
@@ -49,7 +50,7 @@ Add the following services to your `docker-compose.yml` to integrate a Spark mas
 version: '3'
 services:
   spark-master:
-    image: bde2020/spark-master:3.1.1-hadoop3.2
+    image: bde2020/spark-master:3.1.2-hadoop3.2
     container_name: spark-master
     ports:
       - "8080:8080"
@@ -57,7 +58,7 @@ services:
     environment:
       - INIT_DAEMON_STEP=setup_spark
   spark-worker-1:
-    image: bde2020/spark-worker:3.1.1-hadoop3.2
+    image: bde2020/spark-worker:3.1.2-hadoop3.2
     container_name: spark-worker-1
     depends_on:
       - spark-master
@@ -66,7 +67,7 @@ services:
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
   spark-worker-2:
-    image: bde2020/spark-worker:3.1.1-hadoop3.2
+    image: bde2020/spark-worker:3.1.2-hadoop3.2
     container_name: spark-worker-2
     depends_on:
       - spark-master
@@ -75,7 +76,7 @@ services:
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
   spark-history-server:
-      image: bde2020/spark-history-server:3.1.1-hadoop3.2
+      image: bde2020/spark-history-server:3.1.2-hadoop3.2
       container_name: spark-history-server
       depends_on:
         - spark-master
@@ -90,12 +91,12 @@ Make sure to fill in the `INIT_DAEMON_STEP` as configured in your pipeline.
 ### Spark Master
 To start a Spark master:
 
-    docker run --name spark-master -h spark-master -d bde2020/spark-master:3.1.1-hadoop3.2
+    docker run --name spark-master -h spark-master -d bde2020/spark-master:3.1.2-hadoop3.2
 
 ### Spark Worker
 To start a Spark worker:
 
-    docker run --name spark-worker-1 --link spark-master:spark-master -d bde2020/spark-worker:3.1.1-hadoop3.2
+    docker run --name spark-worker-1 --link spark-master:spark-master -d bde2020/spark-worker:3.1.2-hadoop3.2
 
 ## Launch a Spark application
 Building and running your Spark application on top of the Spark cluster is as simple as extending a template Docker image. Check the template's README for further documentation.
@@ -115,11 +116,11 @@ It will also setup a headless service so spark clients can be reachable from the
 
 Then to use `spark-shell` issue
 
-`kubectl run spark-base --rm -it --labels="app=spark-client" --image bde2020/spark-base:3.1.1-hadoop3.2 -- bash ./spark/bin/spark-shell --master spark://spark-master:7077 --conf spark.driver.host=spark-client`
+`kubectl run spark-base --rm -it --labels="app=spark-client" --image bde2020/spark-base:3.1.2-hadoop3.2 -- bash ./spark/bin/spark-shell --master spark://spark-master:7077 --conf spark.driver.host=spark-client`
 
 To use `spark-submit` issue for example
 
-`kubectl run spark-base --rm -it --labels="app=spark-client" --image bde2020/spark-base:3.1.1-hadoop3.2 -- bash ./spark/bin/spark-submit --class CLASS_TO_RUN --master spark://spark-master:7077 --deploy-mode client --conf spark.driver.host=spark-client URL_TO_YOUR_APP`
+`kubectl run spark-base --rm -it --labels="app=spark-client" --image bde2020/spark-base:3.1.2-hadoop3.2 -- bash ./spark/bin/spark-submit --class CLASS_TO_RUN --master spark://spark-master:7077 --deploy-mode client --conf spark.driver.host=spark-client URL_TO_YOUR_APP`
 
 You can use your own image packed with Spark and your application but when deployed it must be reachable from the workers.
 One way to achieve this is by creating a headless service for your pod and then use `--conf spark.driver.host=YOUR_HEADLESS_SERVICE` whenever you submit your application.
