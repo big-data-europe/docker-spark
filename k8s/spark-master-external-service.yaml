@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: spark-master-external-service
+  labels:
+    app: spark-master
+spec:
+  # Create an externally reachable load balancer.
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    name: web-ui
+  selector:
+    app: spark-master
