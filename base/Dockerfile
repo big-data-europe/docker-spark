@@ -7,7 +7,7 @@ ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
 ENV BASE_URL=https://archive.apache.org/dist/spark/
-ENV SPARK_VERSION=3.3.0
+ENV SPARK_VERSION=3.3.1
 ENV HADOOP_VERSION=3
 
 COPY wait-for-step.sh /

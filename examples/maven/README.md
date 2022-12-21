@@ -17,5 +17,5 @@ To run the application, execute the following steps:
     ```
 3. Run the Docker container:
     ```bash
-    docker run --rm --network dockerspark_default --name spark-maven-example bde2020/spark-maven-example:3.3.0-hadoop3.3
+    docker run --rm --network dockerspark_default --name spark-maven-example bde2020/spark-maven-example:3.3.1-hadoop3.3
     ```
