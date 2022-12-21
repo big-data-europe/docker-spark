@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - name: spark-master
-        image: bde2020/spark-master:3.3.0-hadoop3.3
+        image: bde2020/spark-master:3.3.1-hadoop3.3
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
       - name: spark-worker
-        image: bde2020/spark-worker:3.3.0-hadoop3.3
+        image: bde2020/spark-worker:3.3.1-hadoop3.3
         imagePullPolicy: Always
         ports:
         - containerPort: 8081
