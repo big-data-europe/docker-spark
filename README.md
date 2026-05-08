@@ -112,10 +112,18 @@ The BDE Spark images can also be used in a Kubernetes enviroment.
 
 To deploy a simple Spark standalone cluster issue
 
-`kubectl apply -f https://raw.githubusercontent.com/big-data-europe/docker-spark/master/k8s-spark-cluster.yaml`
+`kubectl apply -f k8s/namespace-spark-cluster.yaml`
 
-This will setup a Spark standalone cluster with one master and a worker on every available node using the default namespace and resources. The master is reachable in the same namespace at `spark://spark-master:7077`.
+This will create a namespace *spark-cluster*
+
+`kubectl apply -f k8s/k8s-spark-cluster.yaml -n spark-cluster`
+
+This will setup a Spark standalone cluster with one master and a worker on every available node using the namespace *spark-cluster*. The master is reachable in the same namespace at `spark://spark-master:7077`.
 It will also setup a headless service so spark clients can be reachable from the workers using hostname `spark-client`.
+
+`kubectl apply -f k8s/spark-master-external-service.yaml -n spark-cluster`
+
+Finally, an external service will be created in the namespace *spark-cluster* to expose Spark Web UI using LoadBalancer.
 
 Then to use `spark-shell` issue
 
